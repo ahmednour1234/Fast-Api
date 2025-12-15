@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 from sqlalchemy.exc import IntegrityError
 
@@ -18,6 +19,15 @@ app = FastAPI(
     title="FastAPI Production Scaffold",
     description="Production-ready FastAPI with PostgreSQL, JWT Auth, and Clean Architecture",
     version="1.0.0"
+)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"],  # Allows all headers
 )
 
 # Register exception handlers
