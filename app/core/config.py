@@ -6,8 +6,8 @@ from typing import Optional, List, Union
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
-    DATABASE_URL: str
-    SECRET_KEY: str
+    DATABASE_URL: str = "postgresql+asyncpg://postgres:DeQQUmVqeRyUlBxAJlkDWpSMbwCgXxHh@nozomi.proxy.rlwy.net:41634/railway"
+    SECRET_KEY: str = "CHANGE_ME_TO_A_LONG_RANDOM_SECRET"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     UPLOAD_DIR: str = "uploads"
