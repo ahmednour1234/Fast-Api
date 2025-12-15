@@ -11,6 +11,8 @@ from app.core.config import settings
 from app.models.user import User, Admin, PersonalAccessToken
 from app.models.audit_log import AuditLog
 from app.models.settings import Setting
+from app.models.role import Role, Permission
+from app.models.collection import Collection
 
 # this is the Alembic Config object
 config = context.config

@@ -54,3 +54,22 @@ async def get_current_admin(
         raise UnauthorizedError("Invalid or expired token")
 
     return admin
+
+
+def require_permission(resource: str, action: str):
+    """Dependency factory to check if admin has a specific permission."""
+    async def permission_checker(
+        current_admin: Admin = Depends(get_current_admin),
+        db: AsyncSession = Depends(get_db)
+    ) -> Admin:
+        from app.services.permission_service import PermissionService
+        
+        permission_service = PermissionService(db)
+        has_permission = await permission_service.admin_has_permission(current_admin, resource, action)
+        
+        if not has_permission:
+            raise ForbiddenError(f"Permission required: {resource}:{action}")
+        
+        return current_admin
+    
+    return permission_checker

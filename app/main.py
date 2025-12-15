@@ -12,7 +12,7 @@ from app.core.error_handler import (
     integrity_error_handler,
     general_exception_handler
 )
-from app.api.routes import auth, users, admin, admin_auth, audit_logs, app_settings
+from app.api.routes import auth, users, admin, admin_auth, audit_logs, app_settings, collections, dashboard, roles
 
 app = FastAPI(
     title="FastAPI Production Scaffold",
@@ -38,6 +38,9 @@ app.include_router(users.router, prefix="/users", tags=["Users"])
 app.include_router(admin.router, prefix="/admin", tags=["Admin"])
 app.include_router(audit_logs.router, prefix="/admin", tags=["Audit Logs"])
 app.include_router(app_settings.router, prefix="/settings", tags=["Settings"])
+app.include_router(collections.router, prefix="/collections", tags=["Collections"])
+app.include_router(dashboard.router, prefix="/dashboard", tags=["Dashboard"])
+app.include_router(roles.router, prefix="/admin", tags=["Roles & Permissions"])
 
 @app.get("/")
 async def root():

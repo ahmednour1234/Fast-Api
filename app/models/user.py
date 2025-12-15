@@ -59,6 +59,13 @@ class Admin(Base, SoftDeleteMixin):
         back_populates="admin",
         cascade="all, delete-orphan"
     )
+    
+    # Relationship to roles
+    roles: Mapped[list["Role"]] = relationship(
+        "Role",
+        secondary="admin_roles",
+        back_populates="admins"
+    )
 
 
 class PersonalAccessToken(Base):
